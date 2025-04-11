@@ -1,0 +1,304 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+.tab-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.tab-button {
+    padding: 10px 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.tab-button:hover {
+    background-color: #f0f0f0;
+}
+
+.tab-button.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.table-container {
+    margin-bottom: 30px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.adicionar-linha {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.custos-adicionais {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.custo-item {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.custo-item label {
+    min-width: 200px;
+}
+
+#plano-corte-container {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    padding: 20px;
+    min-height: 400px;
+}
+
+.opcoes-corte {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+#orcamento-container {
+    padding: 20px;
+}
+
+.fita-borda {
+    height: 100px;
+}
+.fita-borda-cell {
+    padding: 8px;
+}
+
+.fita-borda-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.fita-opcao {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.fita-opcao label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    min-width: 100px;
+}
+
+.fita-cor {
+    width: 120px;
+    padding: 4px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.fita-cor:disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
+
+/* Ajuste para as células da tabela */
+#pecas-table td {
+vertical-align: top;
+}
+
+/* Estilo para campos obrigatórios */
+input:required {
+    border-left: 3px solid #007bff;
+}
+
+input:required:invalid {
+    border-left: 3px solid #dc3545;
+}
+/* Estilos adicionais para o orçamento */
+.orcamento-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.orcamento-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #007bff;
+}
+
+.orcamento-metadata {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.orcamento-controls {
+    margin: 20px 0;
+    display: flex;
+    gap: 10px;
+}
+
+.orcamento-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-print {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-save {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-export {
+    background-color: #6c757d;
+    color: white;
+}
+
+/* Estilos para impressão */
+@media print {
+    .tab-container .tabs,
+    .orcamento-controls {
+        display: none;
+    }
+
+    .orcamento-secao {
+        break-inside: avoid;
+    }
+
+    body {
+        padding: 0;
+        margin: 0;
+    }
+
+    .orcamento-container {
+        max-width: 100%;
+    }
+}
+
+/* Melhorias nas tabelas */
+.tabela-detalhada {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.tabela-detalhada th,
+.tabela-detalhada td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.tabela-detalhada th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+.tabela-detalhada tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.tabela-detalhada tr:hover {
+    background-color: #f2f2f2;
+}
+
+/* Estilos para os detalhes expansíveis */
+.details-container {
+    margin: 10px 0;
+}
+
+.details-container summary {
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.details-container summary:hover {
+    background-color: #e9ecef;
+}
+
+.details-content {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+}

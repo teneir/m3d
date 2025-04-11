@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Planejamento de Móveis MDF</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+<script src="https://unpkg.com/@popperjs/core@2"></script>
+<script src="https://unpkg.com/tippy.js@6"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="tab-container">
+        <div class="tabs">
+            <button class="tab-button active" data-tab="planilha">Planilha de Peças</button>
+            <button class="tab-button" data-tab="plano-corte">Plano de Corte</button>
+            <button class="tab-button" data-tab="orcamento">Orçamento Final</button>
+        </div>
+
+        <div class="tab-content active" id="planilha">
+            <h2>Planilha de Peças e Acessórios</h2>
+
+            <!-- Tabela de Peças -->
+            <div class="table-container">
+    <h3>Peças de MDF</h3>
+    <table id="pecas-table">
+        <thead>
+            <tr>
+                <th>Nome da Peça</th>
+                <th>Largura (mm)</th>
+                <th>Comprimento (mm)</th>
+                <th>Quantidade</th>
+                <th>Cor do MDF</th>
+                <th>Fitas de Borda</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="text" class="peca-nome" required></td>
+                <td><input type="number" class="peca-largura" min="0" required></td>
+                <td><input type="number" class="peca-comprimento" min="0" required></td>
+                <td><input type="number" class="peca-quantidade" min="1" value="1" required></td>
+                <td><input type="text" class="peca-cor" required></td>
+                <td class="fita-borda-cell">
+                    <div class="fita-borda-container">
+                        <div class="fita-opcao">
+                            <label>
+                                <input type="checkbox" class="fita-check" data-lado="largura1">
+                                Largura 1
+                            </label>
+                            <input type="text" class="fita-cor" placeholder="Cor da fita" disabled>
+                        </div>
+                        <div class="fita-opcao">
+                            <label>
+                                <input type="checkbox" class="fita-check" data-lado="largura2">
+                                Largura 2
+                            </label>
+                            <input type="text" class="fita-cor" placeholder="Cor da fita" disabled>
+                        </div>
+                        <div class="fita-opcao">
+                            <label>
+                                <input type="checkbox" class="fita-check" data-lado="comprimento1">
+                                Comprimento 1
+                            </label>
+                            <input type="text" class="fita-cor" placeholder="Cor da fita" disabled>
+                        </div>
+                        <div class="fita-opcao">
+                            <label>
+                                <input type="checkbox" class="fita-check" data-lado="comprimento2">
+                                Comprimento 2
+                            </label>
+                            <input type="text" class="fita-cor" placeholder="Cor da fita" disabled>
+                        </div>
+                    </div>
+                </td>
+                <td><button class="adicionar-linha">+</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+            <!-- Acessórios -->
+            <div class="table-container">
+                <h3>Acessórios</h3>
+                <table id="acessorios-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Quantidade</th>
+                            <th>Preço Unitário</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <select class="acessorio-tipo">
+                                    <option value="corrediça">Corrediça 45cm</option>
+                                    <option value="dobradiça">Dobradiça</option>
+                                    <option value="puxador">Puxador</option>
+                                </select>
+                            </td>
+                            <td><input type="number" class="acessorio-quantidade" min="1" value="1"></td>
+                            <td><input type="number" class="acessorio-preco" min="0" step="0.01"></td>
+                            <td class="acessorio-total">R$ 0,00</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button id="adicionar-acessorio">Adicionar Acessório</button>
+            </div>
+
+            <!-- Custos Adicionais -->
+            <div class="custos-adicionais">
+                <h3>Custos Adicionais</h3>
+                <div class="custo-item">
+                    <label>Frete:</label>
+                    <input type="number" id="frete" min="0" step="0.01">
+                </div>
+                <div class="custo-item">
+                    <label>Valor hora de trabalho:</label>
+                    <input type="number" id="valor-hora" min="0" step="0.01">
+                </div>
+                <div class="custo-item">
+                    <label>Horas estimadas:</label>
+                    <input type="number" id="horas-estimadas" min="0" step="0.5">
+                </div>
+                <div class="custo-item">
+                    <label>Despesas gerais (luz, água, etc):</label>
+                    <input type="number" id="despesas-gerais" min="0" step="0.01">
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="plano-corte">
+            <h2>Plano de Corte</h2>
+            <div class="opcoes-corte">
+                <label>Espessura da serra (mm):
+                    <input type="number" id="espessura-serra" value="3.2" min="0" step="0.1">
+                </label>
+                <label>
+                    <input type="checkbox" id="permitir-rotacao" checked>
+                    Permitir rotação das peças
+                </label>
+            </div>
+            <div id="plano-corte-container"></div>
+        </div>
+
+        <div class="tab-content" id="orcamento">
+            <h2>Orçamento Final</h2>
+            <div id="orcamento-container">
+                <!-- Será preenchido via JavaScript -->
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script src="auxiliary-functions.js"></script>
+</body>
+</html>
