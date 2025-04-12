@@ -302,3 +302,38 @@ input:required:invalid {
     border-top: none;
     border-radius: 0 0 4px 4px;
 }
+/* Estilos para a tabela de chapas */
+#chapas-table {
+margin-bottom: 30px;
+}
+
+.adicionar-chapa {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.remover-chapa {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Estilo para o select de cor */
+.peca-cor {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.peca-cor:required {
+    border-left: 3px solid #007bff;
+}
