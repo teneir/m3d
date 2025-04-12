@@ -9,6 +9,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 <script src="https://unpkg.com/@popperjs/core@2"></script>
 <script src="https://unpkg.com/tippy.js@6"></script>
+<script type="module" src="main.js"></script>
+
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -22,6 +24,28 @@
         <div class="tab-content active" id="planilha">
             <h2>Planilha de Peças e Acessórios</h2>
 
+            <div class="table-container">
+    <h3>Chapas de MDF Disponíveis</h3>
+    <table id="chapas-table">
+        <thead>
+            <tr>
+                <th>Cor da Chapa</th>
+                <th>Largura (mm)</th>
+                <th>Comprimento (mm)</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="text" class="chapa-cor" required></td>
+                <td><input type="number" class="chapa-largura" value="1850" min="0" required></td>
+                <td><input type="number" class="chapa-comprimento" value="2750" min="0" required></td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+
             <!-- Tabela de Peças -->
             <div class="table-container">
     <h3>Peças de MDF</h3>
@@ -34,7 +58,7 @@
                 <th>Quantidade</th>
                 <th>Cor do MDF</th>
                 <th>Fitas de Borda</th>
-                <th>Ação</th>
+
             </tr>
         </thead>
         <tbody>
@@ -43,7 +67,11 @@
                 <td><input type="number" class="peca-largura" min="0" required></td>
                 <td><input type="number" class="peca-comprimento" min="0" required></td>
                 <td><input type="number" class="peca-quantidade" min="1" value="1" required></td>
-                <td><input type="text" class="peca-cor" required></td>
+                <td>
+    <select class="peca-cor" required>
+        <option value="">Selecione a cor</option>
+    </select>
+</td>
                 <td class="fita-borda-cell">
                     <div class="fita-borda-container">
                         <div class="fita-opcao">
@@ -76,7 +104,7 @@
                         </div>
                     </div>
                 </td>
-                <td><button class="adicionar-linha">+</button></td>
+
             </tr>
         </tbody>
     </table>
@@ -155,7 +183,30 @@
             </div>
         </div>
     </div>
-    <script src="script.js"></script>
-    <script src="auxiliary-functions.js"></script>
+
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyBGo8NuwQT5G_HA37ZchHZnP8jV9Xh6AOc",
+    authDomain: "m3donline-5754f.firebaseapp.com",
+    projectId: "m3donline-5754f",
+    storageBucket: "m3donline-5754f.firebasestorage.app",
+    messagingSenderId: "584594067554",
+    appId: "1:584594067554:web:88efe28d58c9b883a1813b",
+    measurementId: "G-EDP3ES74LM"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+
 </body>
 </html>
