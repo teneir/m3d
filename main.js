@@ -1,9 +1,9 @@
-import { initTabControl } from './modules/tabControl.js';
-import { initMdfSheets } from './modules/mdfSheets.js';
-import { initPieces } from './modules/pieces.js';
-import { initAccessories } from './modules/accessories.js';
-import { initCutPlan } from './modules/cutPlan.js';
-import { initBudget } from './modules/budget.js';
+import { initTabControl } from 'tabControl.js';
+import { initMdfSheets } from 'mdfSheets.js';
+import { initPieces } from 'pieces.js';
+import { initAccessories } from 'accessories.js';
+import { initCutPlan } from 'cutPlan.js';
+import { initBudget } from 'budget.js';
 
 document.addEventListener('DOMContentLoaded', function() {
     initTabControl();
