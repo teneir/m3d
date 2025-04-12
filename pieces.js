@@ -3,6 +3,9 @@ import { atualizarSelectCores } from './mdfSheets.js';
 export function initPieces() {
     document.querySelector('.adicionar-linha').addEventListener('click', adicionarLinhaPeca);
     setupFitaBorda(document.querySelector('#pecas-table tbody tr'));
+
+    // Adicionando evento ao botão de configuração de fitas de borda
+    document.getElementById('configurar-fita-borda').addEventListener('click', abrirModalFitaBorda);
 }
 
 function adicionarLinhaPeca() {
@@ -45,4 +48,37 @@ function setupFitaBorda(row) {
             }
         });
     });
+}
+
+// Função para abrir o modal de configuração de fitas de borda
+function abrirModalFitaBorda() {
+    const modal = document.querySelector('#modal-fita-borda');
+    modal.style.display = 'block';
+
+    // Populando o modal com as opções disponíveis
+    const fitasDisponiveis = obterFitasDisponiveis();
+    const select = modal.querySelector('#fita-borda-select');
+    select.innerHTML = fitasDisponiveis.map(fita => `<option value="${fita}">${fita}</option>`).join('');
+}
+
+// Função auxiliar para obter as fitas disponíveis
+function obterFitasDisponiveis() {
+    return ['Branca', 'Preta', 'Madeira', 'Cinza']; // Exemplos; pode ser dinâmico
+}
+
+// Fechar o modal ao clicar no botão "Salvar" ou "Cancelar"
+document.getElementById('salvar-fita-borda').addEventListener('click', salvarFitaBorda);
+document.getElementById('cancelar-fita-borda').addEventListener('click', () => {
+    document.querySelector('#modal-fita-borda').style.display = 'none';
+});
+
+function salvarFitaBorda() {
+    const modal = document.querySelector('#modal-fita-borda');
+    const corSelecionada = modal.querySelector('#fita-borda-select').value;
+
+    if (corSelecionada) {
+        alert(`Fita de borda configurada: ${corSelecionada}`);
+    }
+
+    modal.style.display = 'none';
 }
