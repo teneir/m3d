@@ -208,5 +208,73 @@
   const analytics = getAnalytics(app);
 </script>
 
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const chapasTable = document.querySelector('#chapas-table tbody');
+        const pecasTable = document.querySelector('#pecas-table tbody');
+
+        // Função para adicionar uma nova linha na tabela de chapas
+        function adicionarLinhaChapas() {
+            const novaLinha = document.createElement('tr');
+            novaLinha.innerHTML = `
+                <td><input type="text" class="chapa-cor" required></td>
+                <td><input type="number" class="chapa-largura" value="1850" min="0" required></td>
+                <td><input type="number" class="chapa-comprimento" value="2750" min="0" required></td>
+            `;
+            chapasTable.appendChild(novaLinha);
+            monitorarInputsChapas(novaLinha.querySelector('.chapa-cor'));
+        }
+
+        // Função para adicionar uma nova linha na tabela de peças
+        function adicionarLinhaPecas() {
+            const novaLinha = document.createElement('tr');
+            novaLinha.innerHTML = `
+                <td><input type="text" class="peca-nome" required></td>
+                <td><input type="number" class="peca-largura" min="0" required></td>
+                <td><input type="number" class="peca-comprimento" min="0" required></td>
+                <td><input type="number" class="peca-quantidade" min="1" value="1" required></td>
+                <td>
+                    <select class="peca-cor" required>
+                        <option value="">Selecione a cor</option>
+                    </select>
+                </td>
+                <td class="fita-borda-cell">
+                    <div class="fita-borda-container">
+                        <!-- Conteúdo de fitas de borda -->
+                    </div>
+                </td>
+            `;
+            pecasTable.appendChild(novaLinha);
+            monitorarInputsPecas(novaLinha.querySelector('.peca-nome'));
+        }
+
+        // Monitorar inputs de "Cor da Chapa"
+        function monitorarInputsChapas(input) {
+            let linhaAdicionada = false; // Variável para rastrear se uma linha já foi adicionada
+            input.addEventListener('input', function () {
+                if (input.value.trim() !== '' && !linhaAdicionada) {
+                    adicionarLinhaChapas();
+                    linhaAdicionada = true; // Marcar que uma linha já foi adicionada
+                }
+            });
+        }
+
+        // Monitorar inputs de "Nome da Peça"
+        function monitorarInputsPecas(input) {
+            let linhaAdicionada = false; // Variável para rastrear se uma linha já foi adicionada
+            input.addEventListener('input', function () {
+                if (input.value.trim() !== '' && !linhaAdicionada) {
+                    adicionarLinhaPecas();
+                    linhaAdicionada = true; // Marcar que uma linha já foi adicionada
+                }
+            });
+        }
+
+        // Inicializar monitoramento para as linhas existentes
+        chapasTable.querySelectorAll('.chapa-cor').forEach(monitorarInputsChapas);
+        pecasTable.querySelectorAll('.peca-nome').forEach(monitorarInputsPecas);
+    });
+</script>
 </body>
 </html>
